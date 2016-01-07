@@ -13,6 +13,7 @@ import netcheck
 from twitter.twitter import *
 from simplecrypt import encrypt, decrypt
 
+
 class TweetButton(Button):
     def on_press(self):
         def print_request(success, msg):
@@ -20,6 +21,7 @@ class TweetButton(Button):
                 Logger.info('Application notified that tweet succeeded')
             else:
                 Logger.info('Application notified that tweet failed')
+
         twitter = AndroidTwitter()
         twitter.tweet(app.ttext.text, print_request)
 
@@ -35,8 +37,8 @@ class TwitterApp(App):
 
     def build(self):
         self.ttext = TextInput(text='',
-                                 size_hint=(1.0, 0.3),
-                                 font_size=18)
+                               size_hint=(1.0, 0.3),
+                               font_size=18)
         tb = TweetButton(text='Tweet Text',
                          size_hint=(0.5, 0.2))
         root = StackLayout()

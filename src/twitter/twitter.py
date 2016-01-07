@@ -1,10 +1,10 @@
 import requests
 from twython import Twython
 
-CALLBACK_URL= 'kivy://'
-MAX_ATTEMPTS = 3 # steps to try again on exception
+CALLBACK_URL = 'kivy://'
+MAX_ATTEMPTS = 3  # steps to try again on exception
 SAVE_PATH = './twitter_credentials.json'
-MAX_DIMENSION = 375 # for image tweets
+MAX_DIMENSION = 375  # for image tweets
 
 APP_KEY = ''
 APP_SECRET = ''
@@ -39,9 +39,9 @@ class AndroidTwitter():
         twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
         try:
             twitter.update_status(status=status)
-            print "tweet msg successfully"
+            print("tweet msg successfully")
         except TwythonError as e:
-            print e
+            print(e)
         return True
 
     # def _new_request(self, request):
