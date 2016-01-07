@@ -11,12 +11,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from twython import Twython
 import netcheck
 from twitter.twitter import *
-
-
-APP_KEY = ''
-APP_SECRET = ''
-OAUTH_TOKEN = ''
-OAUTH_TOKEN_SECRET = ''
+from simplecrypt import encrypt, decrypt
 
 class TweetButton(Button):
     def on_press(self):
@@ -37,11 +32,9 @@ class TwitterApp(App):
 
     def on_start(self):
         twitter = AndroidTwitter()
-        twitter.home()
-
 
     def build(self):
-        self.ttext = TextInput(text='Kivy will set you free!',
+        self.ttext = TextInput(text='',
                                  size_hint=(1.0, 0.3),
                                  font_size=18)
         tb = TweetButton(text='Tweet Text',
