@@ -1,0 +1,11 @@
+Cython==0.21.2
+Kivy==1.9.1
+Kivy-Garden==0.1.4
+argparse==1.2.1
+oauthlib==1.0.3
+pycrypto==2.6.1
+pygame==1.9.2a0
+requests==2.5.3
+requests-oauthlib==0.6.0
+twython==3.3.0
+wsgiref==0.1.2
