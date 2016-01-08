@@ -11,7 +11,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from twython import Twython
 import netcheck
 from twitter.twitter import *
-from simplecrypt import encrypt, decrypt
+
 
 class TweetButton(Button):
     def on_press(self):
