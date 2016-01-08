@@ -1,18 +1,17 @@
 from kivy.app import App
 from kivy.logger import Logger
-from kivy.uix.widget import Widget
+# from kivy.uix.widget import Widget
 from kivy.uix.button import Button
-from kivy.uix.popup import Popup
-from kivy.properties import StringProperty
-from kivy.clock import Clock
+# from kivy.uix.popup import Popup
+# from kivy.properties import StringProperty
+# from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
 from kivy.uix.stacklayout import StackLayout
-from kivy.uix.relativelayout import RelativeLayout
-from kivy.uix.listview import ListView
-from twython import Twython
-import netcheck
+# from kivy.uix.relativelayout import RelativeLayout
+# from kivy.uix.listview import ListView
+# from twython import Twython
+# import netcheck
 from twitter.twitter import *
-
 
 
 class TweetButton(Button):
@@ -37,6 +36,7 @@ class TweetDirectMsgButton(Button):
 #         twitter = AndroidTwitter()
 #         show_message = twitter.show_message()
 
+
 class TwitterApp(App):
     def __init__(self, *args, **kwargs):
         global app
@@ -53,7 +53,7 @@ class TwitterApp(App):
         tb = TweetButton(text='Tweet Text',
                          size_hint=(0.3, 0.1))
         tib = TweetDirectMsgButton(text='Tweet Direct Message',
-                         size_hint=(0.3, 0.1))
+                                   size_hint=(0.3, 0.1))
 
         # tsb = ShowDirectMsgButton(text='Show Direct Message',
         #          size_hint=(0.4, 0.1))
