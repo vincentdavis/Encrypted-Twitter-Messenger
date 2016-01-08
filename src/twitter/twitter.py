@@ -11,7 +11,6 @@ APP_SECRET = ''
 OAUTH_TOKEN = ''
 OAUTH_TOKEN_SECRET = ''
 
-
 class Request():
     def __init__(self, payload, callback=None):
         self.payload = payload
@@ -21,7 +20,7 @@ class Request():
             self.callback = lambda *args, **kwargs: None
 
 
-class AndroidTwitter():
+class PlainTwitter():
     """ Twitter implementation that uses OAuth and Twitter API"""
     global twitter
     twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
@@ -43,4 +42,8 @@ class AndroidTwitter():
         return True
 
     def show_message(self):
+        pass
+
+class EncryptedTwitter():
+    def encrypt(self):
         pass

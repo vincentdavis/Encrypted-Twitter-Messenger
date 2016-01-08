@@ -22,13 +22,13 @@ class TweetButton(Button):
             else:
                 Logger.info('Application notified that tweet failed')
 
-        twitter = AndroidTwitter()
+        twitter = PlainTwitter()
         twitter.tweet(app.ttext.text, print_request)
 
 
 class TweetDirectMsgButton(Button):
     def on_press(self):
-        twitter = AndroidTwitter()
+        twitter = PlainTwitter()
         twitter.tweetdirectmsg(app.ttext.text)
 
 # class ShowDirectMsgButton(Button):
@@ -44,7 +44,7 @@ class TwitterApp(App):
         super(TwitterApp, self).__init__(*args, **kwargs)
 
     def on_start(self):
-        twitter = AndroidTwitter()
+        twitter = PlainTwitter()
 
     def build(self):
         self.ttext = TextInput(text='tweet',
