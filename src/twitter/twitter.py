@@ -21,7 +21,7 @@ class Request():
             self.callback = lambda *args, **kwargs: None
 
 
-class AndroidTwitter():
+class PlainTwitter():
     """ Twitter implementation that uses OAuth and Twitter API"""
     global twitter
     twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
