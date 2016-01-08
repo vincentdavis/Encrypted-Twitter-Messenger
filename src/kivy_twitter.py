@@ -1,16 +1,8 @@
 from kivy.app import App
 from kivy.logger import Logger
-# from kivy.uix.widget import Widget
 from kivy.uix.button import Button
-# from kivy.uix.popup import Popup
-# from kivy.properties import StringProperty
-# from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
 from kivy.uix.stacklayout import StackLayout
-# from kivy.uix.relativelayout import RelativeLayout
-# from kivy.uix.listview import ListView
-# from twython import Twython
-# import netcheck
 from twitter.twitter import *
 
 
@@ -31,12 +23,6 @@ class TweetDirectMsgButton(Button):
         twitter = PlainTwitter()
         twitter.tweetdirectmsg(app.ttext.text)
 
-# class ShowDirectMsgButton(Button):
-#     def on_press(self):
-#         twitter = PlainTwitter()
-#         show_message = twitter.show_message()
-
-
 class TwitterApp(App):
     def __init__(self, *args, **kwargs):
         global app
@@ -54,15 +40,10 @@ class TwitterApp(App):
                          size_hint=(0.3, 0.1))
         tib = TweetDirectMsgButton(text='Tweet Direct Message',
                                    size_hint=(0.3, 0.1))
-
-        # tsb = ShowDirectMsgButton(text='Show Direct Message',
-        #          size_hint=(0.4, 0.1))
-
         root = StackLayout()
         root.add_widget(self.ttext)
         root.add_widget(tb)
         root.add_widget(tib)
-        # root.add_widget(tsb)
         return root
 
 
