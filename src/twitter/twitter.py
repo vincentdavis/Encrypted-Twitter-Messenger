@@ -21,12 +21,26 @@ class Request():
 
 class AndroidTwitter():
     ''' Twitter implementation that uses OAuth and Twitter API'''
+    global twitter
+    twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+
 
     def tweet(self, status, callback=None):
-        twitter = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
         try:
             twitter.update_status(status=status)
             print ("tweet msg successfully")
         except TwythonError as e:
             print (e)
         return True
+
+
+    def tweetdirectmsg(self, directmsg, callback=None):
+        try:
+            twitter.send_direct_message(screen_name='HeteroT1', text=directmsg)
+            print ("send direct messagesuccessfully")
+        except TwythonError as e:
+            print (e)
+        return True
+
+    def show_message(self):
+        pass
