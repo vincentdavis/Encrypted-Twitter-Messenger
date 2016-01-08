@@ -1,10 +1,10 @@
 import requests
 from twython import Twython
 
-CALLBACK_URL= 'kivy://'
-MAX_ATTEMPTS = 3 # steps to try again on exception
+CALLBACK_URL = 'kivy://'
+MAX_ATTEMPTS = 3  # steps to try again on exception
 SAVE_PATH = './twitter_credentials.json'
-MAX_DIMENSION = 375 # for image tweets
+MAX_DIMENSION = 375  # for image tweets
 
 APP_KEY = ''
 APP_SECRET = ''

@@ -17,7 +17,7 @@ def _netcheck():
     return _Netcheck
 
 def connection_available():
-    return (_netcheck().connection_available())
+    return _netcheck().connection_available()
 
 def set_prompt(fn):
     _netcheck().set_prompt(fn)
