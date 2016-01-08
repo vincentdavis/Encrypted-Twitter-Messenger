@@ -33,7 +33,7 @@ class TweetDirectMsgButton(Button):
 
 # class ShowDirectMsgButton(Button):
 #     def on_press(self):
-#         twitter = AndroidTwitter()
+#         twitter = PlainTwitter()
 #         show_message = twitter.show_message()
 
 
