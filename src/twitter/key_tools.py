@@ -1,16 +1,19 @@
+# -*- coding: utf-8 -*-
 from unicodedata import ucd_3_2_0 as ud
 from functools import reduce
-
-from pktwitter.elgamal2 import PrivateKey, generate_keys, PublicKey
+from elgamal2 import PrivateKey, generate_keys, PublicKey
 
 
 def alphabet():
-    u = ''.join(chr(i) for i in range(65536) if (ud.category(chr(i)) in ('Lu', 'Ll')))[:1000]
+    # import pdb;pdb.set_trace()
+    u = ''.join(unicode(i) for i in range(65536) if (ud.category(unicode(i)) in ('Lu', 'Ll')))[:1000]
+    # u = ''.join(chr(i) for i in range(65536) if (ud.category(chr(i)) in ('Lu', 'Ll')))[:1000]
+    uu_u = u
     # ('Lu', 'Ll', 'Lt', 'Lm', 'Lo' )
     # u = ''.join(chr(i) for i in range(65536) if (ud.category(chr(i)) in ('Lu', 'Ll', 'Lt', 'Lm', 'Lo')))
-    alphabet_size = len(u)
-    decoderdict = dict((b, a) for a, b in enumerate(u))
-    return u, alphabet_size, decoderdict
+    alphabet_size = len(uu_u)
+    decoderdict = dict((b, a) for a, b in enumerate(uu_u))
+    return uu_u, alphabet_size, decoderdict
 
 
 def key_compress(integer):
@@ -28,9 +31,12 @@ def key_expand(code):
 
 def assemble_publickey(tpk):
     # PublicKey(p, g, h, iNumBits)
+    # import pdb;pdb.set_trace()
     p, g, h, iNumBits = tpk.split('|TPK|')[1].split('|')
-    e = PublicKey(key_expand(p), key_expand(g), key_expand(h), key_expand(iNumBits))
-    return e
+    ee_e = PublicKey(key_expand(p), key_expand(g), key_expand(h), key_expand(iNumBits))
+    
+
+    return ee_e
 
 
 def assemble_privatekey(ints):

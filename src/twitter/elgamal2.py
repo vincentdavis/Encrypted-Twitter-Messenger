@@ -80,10 +80,10 @@ s to p-2 instead of -1 in the decryption function.
 """
 
 import random
-
+# -*- coding: utf-8 -*-
 
 class PrivateKey(object):
-    def __init__(self, p=None, g=None, x=None, iNumBits=0):
+    def __init__ (self, p=None, g=None, x=None, iNumBits=0):
         self.p = p
         self.g = g
         self.x = x
@@ -91,11 +91,19 @@ class PrivateKey(object):
 
 
 class PublicKey(object):
-    def __init__(self, p=None, g=None, h=None, iNumBits=0):
+    def __init__ (self, p=None, g=None, h=None, iNumBits=0):
         self.p = p
         self.g = g
         self.h = h
         self.iNumBits = iNumBits
+
+
+# class PublicKey(object):
+#     def __unicode__ (self, p=None, g=None, h=None, iNumBits=0):
+#         self.p = unicode(p).encode('utf-8')
+#         self.g = unicode(g).encode('utf-8')
+#         self.h = unicode(h).encode('utf-8')
+#         self.iNumBits = unicode(iNumBits).encode('utf-8')        
 
 
 # computes the greatest common denominator of a and b.  assumes a > b
@@ -306,6 +314,7 @@ def generate_keys(iNumBits=256, iConfidence=32):
 
 # encrypts a string sPlaintext using the public key k
 def encrypt(key, sPlaintext):
+    # import pdb;pdb.set_trace()
     z = encode(sPlaintext, key.iNumBits)
 
     # cipher_pairs list will hold pairs (c, d) corresponding to each integer in z
@@ -358,12 +367,3 @@ def decrypt(key, cipher):
     return decryptedText
 
 
-def test():
-    keys = generate_keys()
-    priv = keys['privateKey']
-    pub = keys['publicKey']
-    message = "My name is Ryan.  Here is some french text:  Maître Corbeau, sur un arbre perché.  Now some Chinese: 鋈 晛桼桾 枲柊氠 藶藽 歾炂盵 犈犆犅 壾, 軹軦軵 寁崏庲 摮 蟼襛 蝩覤 蜭蜸覟 駽髾髽 忷扴汥 "
-    cipher = encrypt(pub, message)
-    plain = decrypt(priv, cipher)
-
-    return message == plain
