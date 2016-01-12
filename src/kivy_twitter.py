@@ -4,6 +4,8 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.stacklayout import StackLayout
 from twitter.twitter import *
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
 
 
 class TweetButton(Button):
@@ -33,6 +35,20 @@ class TwitterApp(App):
         twitter = PlainTwitter()
 
     def build(self):
+        twitter = PlainTwitter()
+        layout = GridLayout(cols=3, padding=1, spacing=5,
+                size_hint=(None, None), width=1000)
+        layout.bind(minimum_height=layout.setter('height'))
+        timeline_msg = twitter.show_message()
+        print (timeline_msg)
+        for i in range(30):
+            btn = Button(text=str(i), size=(150, 40),
+                         size_hint=(None, None))
+            layout.add_widget(btn)
+
+        root_s = ScrollView(size_hint=(None, None), size=(500, 320),
+                pos_hint={'center_x': .5, 'center_y': .5}, do_scroll_x=False)
+        root_s.add_widget(layout)
         self.ttext = TextInput(text='tweet',
                                size_hint=(0.3, 0.1),
                                font_size=18)
@@ -44,6 +60,8 @@ class TwitterApp(App):
         root.add_widget(self.ttext)
         root.add_widget(tb)
         root.add_widget(tib)
+        root.add_widget(root_s)
+
         return root
 
 
