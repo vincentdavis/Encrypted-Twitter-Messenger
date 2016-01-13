@@ -4,6 +4,10 @@ from twython import Twython
 from pktwitter.messaging import encrypt_message, decrypt_message, send_status_update
 from pktwitter.key_tools import key_compress, key_expand, get_public_key, assemble_publickey, assemble_privatekey, make_twitter_public
 from pktwitter.elgamal2 import PublicKey, encrypt, decrypt, generate_keys
+from collections import defaultdict
+from math import *
+import re
+from kivy_twitter import *
 
 CALLBACK_URL = 'kivy://'
 MAX_ATTEMPTS = 3  # steps to try again on exception
@@ -39,8 +43,9 @@ class PlainTwitter():
             alice_pub_comp = get_public_key(twitter, Alice)
             alice_pub = assemble_publickey(alice_pub_comp)
             encrypted = encrypt_message(status,alice_pub)
-            print(encrypted)
             twitter.update_status(status=encrypted)
+            # reload_app = TwitterApp()
+            # reload_app.run()
             print("tweet msg successfully")
         except TwythonError as e:
             print(e)
@@ -68,16 +73,30 @@ class PlainTwitter():
                                      alice_key_file['g'],
                                      alice_key_file['x'],
                                      alice_key_file['iNumBits']))
+
             print (twitter_cyphertext)
             for twitter_ct in twitter_cyphertext:
-                A_data = decrypt_message(alice_private, twitter_ct)
+                chk_encryption = self.encrypted(twitter_ct)
+                if chk_encryption:
+                    A_data = decrypt_message(alice_private, twitter_ct)
 
-                original_data.append(A_data)
-            print(original_data)
-        except TwythonError as e:
+                    original_data.append(A_data)
+                else:
+                    original_data.append(twitter_ct)
+
+        except Exception as e:
             print(e)
-        return original_data        
+        return original_data
 
-# class EncryptedTwitter():
-#     def encrypt(self):
-#         pass
+
+
+    def encrypted(self,text):
+        try:
+            scores = defaultdict(lambda: 0)
+            for letter in text: scores[letter] += 1
+            largest = max(scores.values())
+            average = len(text) / 256.0
+            return largest < average + 7 * sqrt(average)
+        except:
+            print ("except of condition ")
+            return False

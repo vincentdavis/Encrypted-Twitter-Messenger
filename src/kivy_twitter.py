@@ -36,13 +36,16 @@ class TwitterApp(App):
 
     def build(self):
         twitter = PlainTwitter()
-        layout = GridLayout(cols=3, padding=1, spacing=5,
+        layout = GridLayout(cols=1, padding=1, spacing=5,
                 size_hint=(None, None), width=1000)
         layout.bind(minimum_height=layout.setter('height'))
         timeline_msg = twitter.show_message()
-        print (timeline_msg)
-        for i in range(30):
-            btn = Button(text=str(i), size=(150, 40),
+        btn_menu = Button(text="User Timeline List",font_size='20sp', size=(500, 40),
+                         size_hint=(None, None))
+        layout.add_widget(btn_menu)
+
+        for i in timeline_msg:
+            btn = Button(text=str(i), size=(500, 40),
                          size_hint=(None, None))
             layout.add_widget(btn)
 
