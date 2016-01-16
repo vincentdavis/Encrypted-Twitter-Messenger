@@ -6,6 +6,26 @@ from kivy.uix.stacklayout import StackLayout
 from twitter.twitter import *
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
+from kivy.core.image import Image as CoreImage
+from kivy.uix.scatter import Scatter
+from kivy.core.window import Window
+from kivy.properties import StringProperty
+from glob import glob
+import os
+from os.path import join, dirname
+from random import randint
+
+
+class Picture(Scatter):
+    '''Picture is the class that will show the image with a white border and a
+    shadow. They are nothing here because almost everything is inside the
+    picture.kv. Check the rule named <Picture> inside the file, and you'll see
+    how the Picture() is really constructed and used.
+
+    The source property will be the filename to show.
+    '''
+
+    source = StringProperty(None)
 
 
 class TweetButton(Button):
@@ -25,6 +45,8 @@ class TweetDirectMsgButton(Button):
         twitter = PlainTwitter()
         twitter.tweetdirectmsg(app.ttext.text)
 
+
+
 class TwitterApp(App):
     def __init__(self, *args, **kwargs):
         global app
@@ -36,6 +58,7 @@ class TwitterApp(App):
 
     def build(self):
         twitter = PlainTwitter()
+        root = StackLayout()
         layout = GridLayout(cols=1, padding=1, spacing=5,
                 size_hint=(None, None), width=1000)
         layout.bind(minimum_height=layout.setter('height'))
@@ -53,13 +76,22 @@ class TwitterApp(App):
                 pos_hint={'center_x': .5, 'center_y': .5}, do_scroll_x=False)
         root_s.add_widget(layout)
         self.ttext = TextInput(text='tweet',
-                               size_hint=(0.3, 0.1),
+                               size_hint=(0.4, 0.1),
                                font_size=18)
         tb = TweetButton(text='Tweet Text',
                          size_hint=(0.3, 0.1))
         tib = TweetDirectMsgButton(text='Tweet Direct Message',
                                    size_hint=(0.3, 0.1))
-        root = StackLayout()
+
+        curdir = os.path.dirname(os.path.realpath('__file__'))
+        for filename in glob(join(curdir, 'Images', '*')):
+            try:
+                picture = Picture(source=filename)
+                root.add_widget(picture)
+            except Exception as e:
+                Logger.exception('Pictures: Unable to load <%s>' % filename)
+
+        
         root.add_widget(self.ttext)
         root.add_widget(tb)
         root.add_widget(tib)

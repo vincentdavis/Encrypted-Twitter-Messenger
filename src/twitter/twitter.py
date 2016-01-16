@@ -18,9 +18,10 @@ APP_KEY = ''
 APP_SECRET = ''
 OAUTH_TOKEN = ''
 OAUTH_TOKEN_SECRET = ''
+
 alice_key_file = {'g': ,
                   'p': ,
-                  'x': ,
+                  'x':  ,
                   'iNumBits': }
 
 class Request():
@@ -74,7 +75,7 @@ class PlainTwitter():
                                      alice_key_file['x'],
                                      alice_key_file['iNumBits']))
 
-            print (twitter_cyphertext)
+            # print (twitter_cyphertext)
             for twitter_ct in twitter_cyphertext:
                 chk_encryption = self.encrypted(twitter_ct)
                 if chk_encryption:

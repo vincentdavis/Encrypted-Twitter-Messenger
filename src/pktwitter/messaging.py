@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime as d
+
 from twython import Twython
-from elgamal2 import encrypt, decrypt
-from key_tools import key_compress, key_expand
+
+from pktwitter.elgamal2 import encrypt, decrypt
+from pktwitter.key_tools import key_compress, key_expand
+
 
 def encrypt_message(plaintext, publickey):
     # encrypt the message
     # privateKey is a elgamal object
     # return elgamal.encrypt(publicKey, plaintext)
-
     cypher_int = encrypt(publickey, plaintext)
     cypher_compressed = '|'.join(key_compress(int(n)) for n in cypher_int.strip(' ').split(' '))
     return cypher_compressed
